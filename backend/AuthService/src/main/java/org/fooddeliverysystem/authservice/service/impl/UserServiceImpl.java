@@ -31,40 +31,6 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    @Override
-    @Transactional
-    public User saveUserIfNotExit(String providerId, String email, String username, String image, Provider provider) {
-
-
-        User user = userRepository.findByEmail(email).orElseGet(() -> {
-            return User.builder()
-                    .providerId(providerId)
-                    .email(email)
-                    .name(username)
-                    .provider(provider)
-                    .image(image)
-                    .password("")
-                    .enabled(true)
-                    .build();
-        });
-        return userRepository.save(user);
-
-
-    }
-
-    @Override
-    @Transactional
-    public UserResponseDto createUser(UserRequestDto userRequestDto) {
-        if (userRequestDto.getEmail() != null && userRepository.existsByEmail(userRequestDto.getEmail())) {
-            throw new EmailAlreadyExistException("Email already in use");
-        }
-
-        userRequestDto.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
-        User user = modelMapper.map(userRequestDto, User.class);
-        user.setProvider(Provider.LOCAL);
-        User savedUser = userRepository.save(user);
-        return modelMapper.map(savedUser, UserResponseDto.class);
-    }
 
     @Override
     public UserResponseDto getUserByEmail(String email) {

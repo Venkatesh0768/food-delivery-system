@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
 @Tag(description = "User Management APIs", name = "User Controller")
 public class UserController {
 
@@ -23,11 +23,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/register")
-    @Operation(description = "Register a new user", summary = "User Registration")
-    public ResponseEntity<UserResponseDto> registerUser(@Valid @RequestBody UserRequestDto userRequestDto) {
-        return new ResponseEntity<>(userService.createUser(userRequestDto), HttpStatus.CREATED);
-    }
 
     @GetMapping
     @Operation(description = "Get all users", summary = "Get All Users")

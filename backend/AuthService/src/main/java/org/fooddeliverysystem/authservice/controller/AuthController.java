@@ -14,7 +14,7 @@ import org.fooddeliverysystem.authservice.model.User;
 import org.fooddeliverysystem.authservice.repositories.RefreshTokenRepository;
 import org.fooddeliverysystem.authservice.repositories.UserRepository;
 import org.fooddeliverysystem.authservice.security.JwtService;
-import org.fooddeliverysystem.authservice.service.CookieService;
+import org.fooddeliverysystem.authservice.service.impl.CookieService;
 import org.fooddeliverysystem.authservice.service.impl.AuthServiceImpl;
 import org.fooddeliverysystem.authservice.service.impl.UserServiceImpl;
 import org.springframework.http.HttpHeaders;

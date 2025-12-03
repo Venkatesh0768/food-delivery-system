@@ -40,6 +40,7 @@ public class AuthServiceImpl implements AuthService {
         User user = User.builder()
                 .email(request.getEmail().trim().toLowerCase())
                 .name(request.getName())
+                .phoneNumber(request.getPhoneNumber())
                 .provider(Provider.LOCAL)
                 .password(encoded) // null allowed for OAuth-only users
                 .image(request.getImage())
@@ -52,6 +53,7 @@ public class AuthServiceImpl implements AuthService {
                 .id(saved.getId())
                 .email(saved.getEmail())
                 .name(saved.getName())
+                .phoneNumber(saved.getPhoneNumber())
                 .image(saved.getImage())
                 .enabled(saved.isEnabled())
                 .createdAt(saved.getCreatedAt())

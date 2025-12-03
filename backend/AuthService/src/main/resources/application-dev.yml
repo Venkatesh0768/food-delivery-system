@@ -71,3 +71,8 @@ app:
   auth:
     success-redirect: "http://localhost:5173/auth/success"
     failure-redirect: "http://localhost:5173/auth/failure"
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

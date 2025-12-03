@@ -35,6 +35,13 @@ public class UserRequestDto {
     )
     private String password;
 
+    @Schema($schema = "Phone number of the user", example = "+1234567890")
+    @Pattern(
+            regexp = "^\\+?[1-9]\\d{1,14}$",
+            message = "Invalid phone number format"
+    )
+    private String phoneNumber;
+
     @Schema(description = "Profile image URL", example = "https://example.com/image.png")
     @Size(max = 500, message = "Image URL too long")
     private String image;
