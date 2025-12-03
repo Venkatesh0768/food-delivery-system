@@ -49,7 +49,7 @@ spring:
 logging:
   level:
     root: WARN
-    org.authenticatrion.authservice: DEBUG
+    org.fooddeliverysystem.authservice : DEBUG
   file:
     name: logs/auth-service.log
   pattern:
