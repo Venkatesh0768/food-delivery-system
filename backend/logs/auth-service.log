@@ -1,0 +1,9 @@
+2025-12-03 21:41:30 INFO  o.f.a.AuthServiceApplication - Starting AuthServiceApplication using Java 21.0.7 with PID 21440 (D:\1 Personl Project\Full Stack Project\food-delivery-system\backend\AuthService\target\classes started by Rapolu Venkatesh in D:\1 Personl Project\Full Stack Project\food-delivery-system\backend)
+2025-12-03 21:41:30 DEBUG o.f.a.AuthServiceApplication - Running with Spring Boot v4.0.0, Spring v7.0.1
+2025-12-03 21:41:30 INFO  o.f.a.AuthServiceApplication - The following 1 profile is active: "dev"
+2025-12-03 21:41:36 DEBUG o.f.a.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-12-03 21:41:37 WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-03 21:41:39 WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2025-12-03 21:41:39 INFO  o.f.a.AuthServiceApplication - Started AuthServiceApplication in 9.55 seconds (process running for 10.927)
+2025-12-03 21:41:39 WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2025-12-03 21:41:39 WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'

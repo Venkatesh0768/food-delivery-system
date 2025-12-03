@@ -1,34 +1,33 @@
 package org.fooddeliverysystem.orderservice.model;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Getter
+@Table(name = "delivery_partners")
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "orders")
-public class Order {
+public class DeliveryPartner {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private UUID userId;
-    private UUID restaurantId;
+    private String name;
+    private String phoneNumber;
 
+    private String vehicleType;
+    private String status;
 
-    private BigDecimal totalAmount;
-    private String paymentMethod;  // COD
-    private String orderStatus;    // PLACED, ACCEPTED, DELIVERED
+    private Double currentLon;
+    private Double currentLat;
 
     private Instant createdAt = Instant.now();
-
-
+    private Instant updatedAt = Instant.now();
 }
