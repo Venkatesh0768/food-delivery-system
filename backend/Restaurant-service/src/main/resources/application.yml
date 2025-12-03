@@ -3,4 +3,4 @@ spring:
     active: dev
 
   application:
-    name: restaurant-service
+    name: RESTAURANT-SERVICE

@@ -2,6 +2,7 @@ package org.fooddeliverysystem.orderservice.service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.fooddeliverysystem.orderservice.client.MenuClient;
 import org.fooddeliverysystem.orderservice.dto.AddToCartRequest;
 import org.fooddeliverysystem.orderservice.dto.MenuItemResponse;
 import org.fooddeliverysystem.orderservice.model.Cart;
@@ -20,9 +21,8 @@ public class CartService {
 
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
-    private final RestTemplate restTemplate;
+    private final MenuClient menuClient;
 
-    private final String MENU_ITEM_URL = "http://localhost:9002/menus/items/";
 
     public CartItem addToCart(AddToCartRequest request) {
         //step 1 check if user already has a cart
@@ -33,8 +33,7 @@ public class CartService {
                     return cartRepository.save(newCart);
                 });
 
-        MenuItemResponse menuItem =
-                restTemplate.getForObject(MENU_ITEM_URL + request.getMenuItemId(), MenuItemResponse.class);
+        MenuItemResponse menuItem = menuClient.getMenuItem(request.getMenuItemId());
 
         CartItem item = new CartItem();
         item.setCartId(cart.getId());
