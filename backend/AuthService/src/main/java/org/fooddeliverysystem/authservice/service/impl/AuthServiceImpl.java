@@ -1,30 +1,27 @@
-package org.fooddeliverysystem.authservice.service;
+package org.fooddeliverysystem.authservice.service.impl;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.fooddeliverysystem.authservice.dtos.RegisterRequest;
-import org.fooddeliverysystem.authservice.dtos.RegisterResponse;
+import lombok.AllArgsConstructor;
+import org.fooddeliverysystem.authservice.dto.authdtos.RegisterRequest;
+import org.fooddeliverysystem.authservice.dto.authdtos.RegisterResponse;
 import org.fooddeliverysystem.authservice.model.Provider;
 import org.fooddeliverysystem.authservice.model.User;
-import org.fooddeliverysystem.authservice.repository.RoleRepository;
-import org.fooddeliverysystem.authservice.repository.UserRepository;
+import org.fooddeliverysystem.authservice.repositories.UserRepository;
+import org.fooddeliverysystem.authservice.service.AuthService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
-@RequiredArgsConstructor
-@Slf4j
-@Transactional
-public class UserServiceImpl implements UserService {
+@AllArgsConstructor
+public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;  // New: For default roles
+    private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public RegisterResponse registerUser(RegisterRequest request) {
+    public RegisterResponse register(RegisterRequest request) {
         if (request == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body is required");
         }
@@ -42,8 +39,7 @@ public class UserServiceImpl implements UserService {
 
         User user = User.builder()
                 .email(request.getEmail().trim().toLowerCase())
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
+                .name(request.getName())
                 .provider(Provider.LOCAL)
                 .password(encoded) // null allowed for OAuth-only users
                 .image(request.getImage())
@@ -55,8 +51,7 @@ public class UserServiceImpl implements UserService {
         return RegisterResponse.builder()
                 .id(saved.getId())
                 .email(saved.getEmail())
-                .firstName(saved.getFirstName())
-                .lastName(saved.getLastName())
+                .name(saved.getName())
                 .image(saved.getImage())
                 .enabled(saved.isEnabled())
                 .createdAt(saved.getCreatedAt())

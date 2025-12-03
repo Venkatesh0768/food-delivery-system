@@ -1,4 +1,4 @@
-package org.fooddeliverysystem.authservice.dtos;
+package org.fooddeliverysystem.authservice.dto.authdtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

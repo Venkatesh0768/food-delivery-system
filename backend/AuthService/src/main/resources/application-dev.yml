@@ -1,0 +1,73 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: auth-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/authDB
+    username: root
+    password: Realme6G90T
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      pool-name: neon-hikari
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      connection-timeout: 20000
+      max-lifetime: 1800000
+      validation-timeout: 5000
+      leak-detection-threshold: 0
+      initialization-fail-timeout: -1
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope:
+              - email
+              - profile
+              - openid
+
+        provider:
+          github:
+            authorization-uri: https://github.com/login/oauth/authorize
+            token-uri: https://github.com/login/oauth/access_token
+            user-info-uri: https://api.github.com/user
+            user-name-attribute: id
+
+logging:
+  level:
+    root: WARN
+    org.authenticatrion.authservice: DEBUG
+  file:
+    name: logs/auth-service.log
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+
+security:
+  jwt:
+    secret-key: "u3FJk4l7pTx3B8dHs82k9Pd8Lkw93Ls9OQv0w9oP1s4="
+    issuer: auth-backend
+    access-ttl-seconds: 900
+    refresh-ttl-seconds: 1209600
+    refresh-cookie-name: refresh_token
+    cookie-secure: true
+    cookie-same-site: Lax
+
+app:
+  cors:
+    allowed-origins: "http://localhost:5173"
+  auth:
+    success-redirect: "http://localhost:5173/auth/success"
+    failure-redirect: "http://localhost:5173/auth/failure"

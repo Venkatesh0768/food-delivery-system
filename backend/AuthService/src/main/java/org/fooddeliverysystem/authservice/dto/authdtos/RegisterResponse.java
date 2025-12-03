@@ -1,4 +1,4 @@
-package org.fooddeliverysystem.authservice.dtos;
+package org.fooddeliverysystem.authservice.dto.authdtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,8 +15,7 @@ import java.util.UUID;
 public class RegisterResponse {
     private UUID id;
     private String email;
-    private String firstName;
-    private String lastName;
+    private String name;
     private String image;
     private boolean enabled;
     private Instant createdAt;

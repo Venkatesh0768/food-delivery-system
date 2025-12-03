@@ -5,36 +5,34 @@ import lombok.*;
 
 import java.time.Instant;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Setter
-@Getter
 @Table(name = "users")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String providerId;
-    private String firstName;
-    private String lastName;
-    private String image;
-    private boolean enabled = true;
-    private String phoneNumber;
+    private  String providerId;
 
-    @Column(nullable = false , unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
-    private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Address> addresses;
+    private String name;
+    private String password;
+    private String image;
+
+    private boolean enabled = true;
+    private Instant createdAt = Instant.now();
+    private Instant updatedAt = Instant.now();
+
 
     @Enumerated(EnumType.STRING)
     private  Provider provider=Provider.LOCAL;
@@ -42,17 +40,16 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> role = new HashSet<>();
-
-    private Instant createdAt;
-    private Instant updatedAt;
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     @PrePersist
     protected void onCreate() {
-        createdAt = Instant.now();
-        updatedAt = Instant.now();
+        Instant now = Instant.now();
+        if (createdAt == null) {
+            createdAt = now;
+        }
+        updatedAt = now;
     }
 
     @PreUpdate
